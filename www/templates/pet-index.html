@@ -3,13 +3,13 @@
   It was wired up in the app config (app.js) 
   The 'pets' data comes from its $scope within PetIndexCtrl (controller.js)
 -->
-<view title="'Pet Information'">
-  <content has-header="true" has-tabs="true">
+<view title="'DRUGs'">
+  <content has-header="true" has-tabs="true" scroll="true" on-refresh="onRefresh()">
+   <refresher></refresher>
     <list>
       <item ng-repeat="pet in pets" type="item-text-wrap" href="#/tab/pet/{{pet.id}}">
         <h3>{{pet.title}}</h3>
         <p>{{pet.description}}</p>
-        </item>
       </item>
     </list>
   </content>

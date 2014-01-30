@@ -2,14 +2,28 @@ angular.module('starter.controllers', [])
 
 
 // A simple controller that fetches a list of data from a service
-.controller('PetIndexCtrl', function($scope, PetService) {
-  // "Pets" is a service returning mock data (services.js)
-  $scope.pets = PetService.all();
+.controller('PetIndexCtrl', function($scope, PetService, $ionicLoading) {
+  $scope.pets = PetService.events
+
+  $scope.onRefresh = function(){
+    PetService.getEvents().then(function(){
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+  };
 })
 
 
 // A simple controller that shows a tapped item's data
 .controller('PetDetailCtrl', function($scope, $stateParams, PetService) {
-  // "Pets" is a service returning mock data (services.js)
-  $scope.pet = PetService.get($stateParams.petId);
+  $scope.presentations = []
+  $scope.event = {}
+
+  PetService.get($stateParams.petId).then(function(data){
+    angular.extend($scope.event, data.data)
+  });
+
+  $scope.promise = PetService.getPresenations($stateParams.petId);
+  $scope.promise.then(function(data){
+    angular.extend($scope.presentations, data.data.presentations)
+  });
 });

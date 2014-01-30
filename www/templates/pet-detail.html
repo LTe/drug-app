@@ -6,7 +6,27 @@
 -->
 <view title="pet.title">
   <content has-header="true" padding="true">
-    <p>{{ pet.description }}</p>
-    <p><a class="button button-small icon ion-arrow-left-b" href="#/tab/pets"> All Pets</a></p>
+<div class="list card">
+
+  <div class="item item-avatar">
+    <img src="img/drug-logo.jpg">
+    <h2>{{ event.title }}</h2>
+    <p>{{ event.starting_at }}</p>
+  </div>
+
+  <div class="item item-body">
+    <p>
+      {{ event.description }}
+    </p>
+
+    <a ng-repeat="presentation in presentations" class="item item-avatar" href="#">
+      <img src="{{ presentation.speaker_avatar }}">
+      <h2 class="no-margin">{{ presentation.title }}</h2>
+      <p class="no-margin">{{ presentation.speaker_full_name }}</p>
+    </a>
+
+  </div>
+</div>
   </content>
+
 </view>

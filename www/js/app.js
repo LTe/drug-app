@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.services', 'starter.controllers', 'ngResource'])
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -44,15 +44,6 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
       }
     })
 
-    .state('tab.adopt', {
-      url: '/adopt',
-      views: {
-        'adopt-tab': {
-          templateUrl: 'templates/adopt.html'
-        }
-      }
-    })
-
     .state('tab.about', {
       url: '/about',
       views: {
@@ -65,5 +56,7 @@ angular.module('starter', ['ionic', 'starter.services', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/pets');
 
+}).run(function(PetService){
+  PetService.getEvents()
 });
 
